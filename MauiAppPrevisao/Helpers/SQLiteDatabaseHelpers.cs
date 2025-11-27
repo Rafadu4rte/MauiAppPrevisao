@@ -17,7 +17,6 @@ namespace MauiAppPrevisao.Helpers
         {
             _conn = new SQLiteAsyncConnection(path);
 
-            // Criação das tabelas
             _conn.CreateTableAsync<Usuario>().Wait();
             _conn.CreateTableAsync<HistoricoConsulta>().Wait();
         }
