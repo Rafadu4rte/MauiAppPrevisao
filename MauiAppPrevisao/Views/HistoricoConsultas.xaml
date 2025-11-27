@@ -2,11 +2,38 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppPrevisao.Views.HistoricoConsultas"
-             Title="HistoricoConsultas">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Title="Histórico de Consultas">
+
+    <VerticalStackLayout Padding="12" Spacing="10">
+
+        <Label Text="Filtrar por intervalo" FontAttributes="Bold" />
+
+        <HorizontalStackLayout Spacing="8">
+            <DatePicker x:Name="dt_inicio" />
+            <DatePicker x:Name="dt_fim" />
+        </HorizontalStackLayout>
+
+        <Button Text="Filtrar" Clicked="btn_filtrar_Clicked" BackgroundColor="#0077FF" TextColor="White" />
+
+        <ListView x:Name="lst_historico" IsPullToRefreshEnabled="True" Refreshing="lst_historico_Refreshing">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Remover" Clicked="MenuItem_Remover_Clicked" />
+                        </ViewCell.ContextActions>
+
+                        <Frame Padding="10" Margin="6" BorderColor="Gray">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Cidade}" FontAttributes="Bold" />
+                                <Label Text="{Binding Temperatura, StringFormat='Temperatura: {0} °C'}" />
+                                <Label Text="{Binding Clima}" />
+                                <Label Text="{Binding DataConsulta, StringFormat='Data: {0:dd/MM/yyyy HH:mm}'}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </VerticalStackLayout>
 </ContentPage>
